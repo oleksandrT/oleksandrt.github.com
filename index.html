@@ -1,8 +1,38 @@
 <html>
 <head>
-	<title></title>
+	<title>Task 3 - table</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style3.css">
+	<script type="text/javascript" src="script3.js"></script>
 </head>
 <body>
-hello world!
+
+	<div class="wrapper">
+		<h1>Компании</h1>
+		<div class="controls">
+			<div class="text">
+				<input type="text" value="Название, контактное лицо" size="40">
+			</div>
+			<div class="sorting">
+				<p>По виду деятельности</p>
+				<form>
+					<select size="1" name="business">
+						<option value="all">Все виды</option>
+						<option value="banks">Банковские услуги</option>
+						<option value="shops">Магазины</option>
+						<option value="bear">Пивные компании</option>
+						<option value="orgtech">Магазины оргтехники</option>
+					</select>
+				</form>
+			</div>
+		</div>
+		<table cellpadding="0" cellspacing="0" border="0" class="clients">
+			<thead>
+				<tr></tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+
 </body>
 </html>

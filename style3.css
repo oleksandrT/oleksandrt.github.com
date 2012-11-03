@@ -1,0 +1,96 @@
+html, body, ul, h1, p, form, select {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: Arial;
+	font-size: 12px;
+}
+
+table {
+	text-align: left;
+	/*table-layout: fixed;*/
+}
+
+td {
+	padding: 8px;
+}
+
+thead {
+	/*border-bottom: 1px solid grey;*/
+	background-color: #fff;
+	width: 100%;
+	background: url(titlesBg.png) repeat-x;
+}
+
+thead td {
+	cursor: pointer;
+}
+
+tbody tr {
+	position: relative;
+}
+
+tbody tr:hover {
+	background-color: #E5E9F0;
+}
+
+.wrapper {
+	padding: 20px;
+}
+
+.controls {
+	height: 35px;
+	position: relative;
+}
+
+.text {
+/*	padding-top: 17px;
+	padding-right: 20px;*/
+}
+
+.text input {
+	height: 20px;
+}
+
+.text, .sorting {
+	float: left;
+	position: absolute;
+	bottom: 0;
+}
+
+.sorting {
+	left: 400px;
+}
+
+table { width: 100%; }
+
+.fixed {
+	position: fixed;
+	top: 0;
+}
+
+.pageSelect {
+	padding: 30px 3px;
+}
+
+.pageSelect span {
+	padding: 0 5px;
+	color: #3276DB;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.pageSelect span:hover {
+	border: 1px solid #E5E9F0;
+}
+
+.editIcon {
+	/*position: absolute;
+	right: 0;
+	top: 0;*/
+	background: url(pen.png) no-repeat;
+	width: 15px;
+	height: 15px;
+}

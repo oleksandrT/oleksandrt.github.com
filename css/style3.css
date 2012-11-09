@@ -41,7 +41,7 @@ thead {
 	/*border-bottom: 1px solid grey;*/
 	background-color: #fff;
 	width: 100%;
-	background: url(titlesBg.png) repeat-x;
+	background: url(../images/titlesBg.png) repeat-x;
 }
 
 thead td {

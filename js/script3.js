@@ -38,22 +38,31 @@ var DataTable = {
 
 	init: function(options) {
 		var me = this
+
+		this.setElements()
+		this.fillWithData()
+		this.titlePosition()
+		this.paging()
+		this.setEventListeners()
+
+		// this.setURL()
+
+	},
+
+	setElements: function() {
 		this.table = document.querySelector('.clients')
 		this.thead = this.table.getElementsByTagName('thead')[0]
 		var controls = document.querySelector('.controls')
 		this.input = controls.getElementsByTagName('input')[0]
 		this.select = controls.getElementsByTagName('select')[0]
+	},
 
-		this.creatTitles()
-		this.fillWithData()
-		this.titlePosition()
-		this.paging()
+	setEventListeners: function() {
+		var me = this
 		this.input.addEventListener( 'focus', function(){me.onFocus(me.input)} )
 		this.select.addEventListener( 'change', function(){me.selectChange(me.select.value)} )
 		document.addEventListener( 'keyup', function(e){me.handlerSelect(e)} )
-
-		this.setURL()
-
+		this.thead.addEventListener('click', function(e){me.onClickTitle(e)})
 	},
 
 	setURL: function(){
@@ -61,28 +70,24 @@ var DataTable = {
 		history.pushState({}, '', query+"?sort=name=desc&page=1&filter=&type=*")
 	},
 
-	creatTitles: function() {
-		var me = this
-		for (var i = 0, length = this.titles.length; i < length; i++) {
-			var tdTitle = document.createElement('td')
-			tdTitle.innerHTML = this.titles[i]
-			this.thead.getElementsByTagName('tr')[0].appendChild(tdTitle)
-		}
-		this.thead.addEventListener('click', function(e){me.onClickTitle(e)})
-	},
 
 	fillWithData: function() {
-		var me = this
+		var me = this,
+			tri, tdi, icon
 		this.tbody = this.table.getElementsByTagName('tbody')[0]
 		for (var i = 0, Ntrs = datas.length; i < Ntrs; i++) {
-			var tri = document.createElement('tr')
+			tri = document.createElement('tr')
 			this.tbody.appendChild(tri)
 			for(var key in datas[i]) {
-				var tdi = document.createElement('td')
+				tdi = document.createElement('td')
 				tdi.innerHTML = datas[i][key]
 				tri.appendChild(tdi)
 				
 			}
+			icon = document.createElement('td')
+			icon.innerHTML = '<span class="editIcon"></span>'
+			tri.appendChild(icon)
+
 		}
 		this.tbody.addEventListener('mouseover', function(e){me.onOverRow(e)})
 	},
@@ -140,9 +145,12 @@ var DataTable = {
 	},
 
 	setColsWidth: function(elem) {
+		var attrWidth
 		for (var i = 0, length = elem.length; i < length; i++) {
-			elem[i].style.width = this.widths[i] - 16 // last amount is taken from (padding + border-width) of TD element
+			attrWidth = 'width: ' + (this.widths[i] - 16) + 'px' // last amount is taken from (padding + border-width) of TD element
+			elem[i].setAttribute('style', attrWidth);
 		}
+
 	},
 
 	onFocus: function(el) {
@@ -160,6 +168,9 @@ var DataTable = {
 	handlerSelect: function(e){
 		if (e.target == this.input) {
 			this.onKeyPressed(e, this.input.value)
+		}
+		if (e.altKey == true && e.keyCode == 91) {
+			console.log('alt pressed')
 		}
 	},
 
@@ -179,6 +190,7 @@ var DataTable = {
 	},
 
 	onClickTitle: function(e){
+		e.preventDefault()
 		if(e.target.innerHTML == 'Название'){
 			adress = this.modifyURLtitle()
 			history.pushState({}, '', adress)
@@ -192,17 +204,21 @@ var DataTable = {
 
 	onOverRow: function(e) {
 		var me = this,
-			parent = e.target.parentNode
-		if(parent){}
-		var editIcon = document.createElement('span')
-		editIcon.className = 'editIcon'
-		parent.appendChild(editIcon)
-		this.tbody.addEventListener('mouseout', function(){ me.onLeaveRow(parent, editIcon) })
-		// editIcon.addEventListener('click', function(){ me.onEdit() })
+			parent = e.target.parentNode,
+			elem = parent.getElementsByTagName('span')[0]
+
+		elem.className += ' visible'
+		parent.addEventListener('mouseout', function(){ me.onLeaveRow(elem) })
+		elem.addEventListener('click', function(e){ me.onEdit(e) })
 	},
 
-	onLeaveRow: function(parent, child){
-		// parent.removeChild(child)
+	onLeaveRow: function(elem){
+		elem.className = 'editIcon'
+	},
+
+	onEdit: function(e){
+		e.preventDefault
+		alert('Save')
 	},
 
 	modifyURLinput: function(val){
@@ -219,10 +235,20 @@ var DataTable = {
 
 	modifyURLselect: function(val) {
 		var params = window.location.search.toString(1),
+			val = this.setType(val),
 			pos
-		pos = params.indexOf('type')
-		val = this.setType(val)
-		return params = params.substring(0, pos+5)+val
+
+		if (params == '') {
+			params = '?sort=&type='+val
+		} else {
+			if (params.indexOf('type') < 0) {
+				params = params+'&type='+val
+			} else {
+				pos = params.indexOf('type')
+				params = params.substring(0, pos+5)+val
+			}
+		}
+		return params
 	},
 
 	setType: function(val) {
@@ -249,26 +275,83 @@ var DataTable = {
 
 	modifyURLtitle: function() {
 		var params = window.location.search.toString(1),
-			pos1, pos2
-		pos1 = params.indexOf('name')
-		pos2 = params.indexOf('&page')
-		var val = params.substring(pos1+5, pos2)
+			pos1 = params.indexOf('name'), 
+			pos2,
+			me = this
 
+		if (params == '') { 
+			params = '?sort=name=asc'
+		}
+		else {
+			if (params.indexOf('&') == -1) {
+				pos2 = params.length
+
+				var val = params.substring(pos1+5, pos2)
+				val = me.changeDirect(val)
+				params = params.substring(0, pos1+5)+val
+			} else {
+				pos2 = params.indexOf('&', pos1)
+				if(pos1 == -1) {
+					pos1 = params.indexOf('sort')
+					params = params.substring(0, pos1+5)+'name=asc'+params.substring(pos2)
+				} else {
+					var val = params.substring(pos1+5, pos2)
+					console.log('val: ', val)
+					val = me.changeDirect(val)
+					console.log('val: ', val)
+
+					params = params.substring(0, pos1+5)+val+params.substring(pos2)
+				}
+
+			}
+
+		}
+
+		return params
+	},
+
+	changeDirect: function(val){
 		if(val == 'desc'){
 			val = 'asc'
 		} else {
 			val = 'desc'
 		}
-
-		return params = params.substring(0, pos1+5)+val+params.substring(pos2)
+		return val
 	},
 
 	modifyURLpage: function(val){
 		var params = window.location.search.toString(1),
 			pos1, pos2
-		pos1 = params.indexOf('page')
-		pos2 = params.indexOf('&filter')
-		return params = params.substring(0, pos1+5)+val+params.substring(pos2)
+
+
+		
+
+		console.log('params(before): ', params)
+		if (params == '') { 
+			params = '?sort=&page='+val
+		} else {
+			if (params.indexOf('&type') == -1) {
+				if (params.indexOf('&page') == -1) {
+					params = params+'&page='+val
+				} else {
+					params = params.substring(0, (params.length-1))+val
+				}
+			} else {
+				pos2 = params.indexOf('&type')
+				console.log('pos2: ', pos2)
+
+				if (params.indexOf('&page') == -1) {
+					params = params.substring(0, pos2-1)+'&page='+val+params.substring(pos2)
+				} else {
+					pos1 = params.indexOf('page')
+					params = params.substring(0, pos1+5)+val+params.substring(pos2)
+				}
+			}
+		}
+
+		console.log('params(after): ', params)
+
+		return params
 	}
 	
 }

@@ -1,0 +1,228 @@
+html, body, ul, h1, p, form, select {
+	padding: 0;
+	margin: 0;
+}
+
+html {width: 100%;}
+
+body {
+	font-family: Arial;
+	font-size: 12px;
+	background-color: #69727C;
+}
+
+div.text {
+	position: relative;
+}
+
+.text input {
+	display: block;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 8px;
+    color: #333;
+    box-shadow: 
+        inset 0 2px 0 rgba(0,0,0,.2), 
+        0 0 4px rgba(0,0,0,0.2);
+}
+
+.text input:focus {
+	outline: none;
+    box-shadow: 
+        inset 0 2px 0 rgba(0,0,0,.2), 
+        0 0 4px rgba(0,0,0,0.1), 
+        0 0 5px 1px #ffffff; /* #51CBEE */
+}
+
+span.clear {
+	position: absolute;
+	font-size: 16px;
+	top: 3px;
+	right: 5px;
+	cursor: default;
+	width: 20px;
+	height: 20px;
+}
+
+table {
+	text-align: left;
+	/*width:100%;*/
+}
+
+td {
+	padding: 10px;
+	position: relative;
+}
+
+thead {
+	/*border-bottom: 1px solid grey;*/
+	background-color: #fff;
+	width: 100%;
+	background: url(../img/titlesBg.png) repeat-x;
+}
+
+thead td {
+	cursor: pointer;
+}
+
+thead td a { 
+	color: #000;
+	text-decoration: none;
+	border-bottom: 1px dashed #3276DB; 
+	font-weight: bold;
+}
+
+thead td a.desc:before {
+	content: "↓ ";
+	margin-left: -8px
+}
+
+thead td a.asc:before {
+	content: "↑ ";
+	margin-left: -8px
+}
+
+tbody {
+	position: relative;
+}
+
+tbody tr {
+	/*position: relative;*/
+	overflow: hidden;
+	width: 100%;
+	cursor: default;
+	border: 1px solid red;
+}
+
+tbody tr:hover {
+	background-color: #E5E9F0;
+}
+
+.wrapper {
+	display: inline-table;
+	padding: 20px;
+	background-color: #fff;
+	margin: 40px 10px 0;
+	white-space: nowrap;
+	-webkit-user-select: none; 
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.controls {
+	height: 35px;
+	position: relative;
+	margin: 20px 0;
+}
+
+.sorting {
+	font-weight: bold;
+	font-size: 12px;
+	left: 320px;
+}
+
+.sorting p {
+	margin-bottom: 5px;
+}
+
+.text input {
+	height: 14px;
+}
+
+.text, .sorting {
+	float: left;
+	position: absolute;
+	bottom: 0;
+}
+
+.fixed {
+	position: fixed;
+	top: 0;
+}
+
+.editIcon {
+	visibility: hidden;
+	display: block;
+	/*float: right;*/
+	background: url(../img/pen.png) no-repeat;
+	width: 15px;
+	height: 15px;
+	/*margin: 8px;*/
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 3px;
+}
+
+.visible {
+	visibility: visible;
+}
+
+tbody tr:hover .editIcon{visibility: visible;}
+
+.show {
+	display: block!important;
+}
+
+.centered {
+	text-align: center;
+}
+
+.fade {
+	opacity: 0.2;
+}
+
+.modal {
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	background-color: #fff;
+	width: 700px;
+	margin-left: -350px;
+	padding: 20px;
+	z-index: 999;
+	display: none;
+}
+
+.modal label {
+	float: left;
+	width: 200px;
+	padding-top: 3px;
+	outline: none;
+}
+
+.modal input {
+	display: block;
+    border: 1px solid rgba(0,0,0,.2);
+    /*padding: 5px 8px;*/
+    color: #333;
+    box-shadow: 
+        inset 0 1px 0 rgba(0,0,0,.2), 
+        0 0 0 rgba(0,0,0,0.2);
+}
+
+.labels {
+	margin-top: 15px;
+	position: relative;
+}
+
+.years {
+	position: absolute;
+	left: 270px;
+	top: -3px;
+	margin-right: 360px; 
+	padding-top: 5px;
+}
+
+.buttons {
+	border-radius: 3px;
+	background: url(../img/btn-bg.jpg);
+	border: 1px solid rgba(0,0,0,.2);
+}
+
+.add {
+	width: 30px;
+	position: absolute;
+	top: -2px;
+	left: 380px;
+}

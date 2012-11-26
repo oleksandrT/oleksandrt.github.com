@@ -1,19 +1,23 @@
+<!doctype html>
 <html>
 <head>
-	<title>Task 3 - table</title>
+	<title>TASK 6 - Last</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" href="style3.css">
-	<script type="text/javascript" src="script3.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/table.js"></script>
+	<script type="text/javascript" src="js/dialog.js"></script>
 </head>
 <body>
 
 	<div class="wrapper">
-		<h1>Компании</h1>
+		<h1>Отдел</h1>
 		<div class="controls">
 			<div class="text">
 				<input type="text" value="Название, контактное лицо" size="40">
+				<span class="clear">&otimes;</span>
 			</div>
-			<div class="sorting">
+			<!-- <div class="sorting">
 				<p>По виду деятельности</p>
 				<form>
 					<select size="1" name="business">
@@ -24,15 +28,98 @@
 						<option value="orgtech">Магазины оргтехники</option>
 					</select>
 				</form>
-			</div>
+			</div> -->
 		</div>
 		<table cellpadding="0" cellspacing="0" border="0" class="clients">
 			<thead>
-				<tr></tr>
+				<tr>
+					<td>
+						<a href="">Имя</a>
+					</td>
+					<td>
+						<a href="">Возраст</a>
+					</td>
+					<td>
+						<a href="">Зарплата</a>
+					</td>
+					<td>
+						<a href="">Город</a>
+					</td>
+					<td>
+						<a href="">Телефоны</a>
+					</td>
+					<td>
+						<a href="">Почта</a>
+					</td>
+					<td>
+						<a href="">Сайты</a>
+					</td>
+					<td>
+						<a href="">Дата рождения</a>
+					</td>
+					<td>
+						<a href="">Описание</a>
+					</td>
+				</tr>
 			</thead>
 			<tbody></tbody>
 		</table>
+		<br>
+		<input type="button" value="Добавить" id="add">
 	</div>
+
+	<div class="modal">
+		<h1>Добавить пользователя</h1>
+		<form action="index.html">
+			<div class="labels">
+				<label>Имя и фамилия</label>
+				<input type="text" size="70" name="name" data-name="name">
+			</div>
+			<div class="labels">
+				<label>Возраст</label>
+				<input type="text" size="5" name="age" data-name="age">
+				<div class="years">полных лет</div>
+			</div>
+			<div class="labels">
+				<label>Город</label>
+				<input type="text" name="city" data-name="city">
+			</div>
+			<div class="labels">
+				<label>Зарплата</label>
+				<input type="text" size="10" name="salary" data-name="salary">
+			</div>
+			<div class="labels">
+				<label>Телефоны</label>
+				<input type="text" size="24" name="phone" data-name="phone">
+				<input type="button" value="+" class="buttons add">
+			</div>
+			<div class="labels">
+				<label>Почта</label>
+				<input type="text" size="24" name="email" data-name="email">
+				<input type="button" value="+" class="buttons add">
+			</div>
+			<div class="labels">
+				<label>Сайты</label>
+				<input type="text" size="24" name="sites" data-name="sites">
+				<input type="button" value="+" class="buttons add">
+			</div>
+			<div class="labels">
+				<label>Дата рождения</label>
+				<input type="text" size="24" name="birthday" data-name="birthday">
+			</div>
+			<div class="labels">
+				<label>Описание</label>
+				<textarea cols="53" rows="3" name="about" data-name="about"></textarea>
+			</div>
+			<input type="button" value="Добавить" class="buttons" data-button="addEdit">
+		</form>
+	</div>
+
+<script>
+	window.onload = function() {
+		var table = new Table(".wrapper")
+	}
+</script>
 
 </body>
 </html>

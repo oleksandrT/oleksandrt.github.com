@@ -5,8 +5,8 @@ function Dialog() {
 		dialogTitle = dialogBox.getElementsByTagName('h1')[0],
 		addEditBtn = dialogBox.querySelector('input[data-button="addEdit"]'),
 		inputs = dialogBox.getElementsByTagName('input'),
-		txtField = dialogBox.getElementsByTagName('textarea')[0],
-		storedData = JSON.parse(localStorage.tableData)
+		txtField = dialogBox.getElementsByTagName('textarea')[0]
+		// storedData = JSON.parse(localStorage.tableData)
 		// table = new Table()
 
 

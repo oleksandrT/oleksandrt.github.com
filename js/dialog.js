@@ -59,14 +59,15 @@ function Dialog() {
 			}
 		}
 		newArray['about'] = txtField.value
-		storedData.push(newArray)
+/*		storedData.push(newArray)
 		console.log('1: ', storedData, storedData.length)
 		localStorage.tableData = JSON.stringify(storedData)
-		close()
 		dataChanged = true
 		console.log('newStoredData: ', newStoredData)
+*/
+		close()
 	}
 
-	return {edit: edit, addUser: addUser, newStoredData: storedData, dataChanged: dataChanged}
+	return {edit: edit, addUser: addUser}
 
 }

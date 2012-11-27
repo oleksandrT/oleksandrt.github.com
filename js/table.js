@@ -1,4 +1,3 @@
-
 function Table(sel) {
 	
 	var dialog = new Dialog(),
@@ -47,13 +46,14 @@ function Table(sel) {
 		storedData = JSON.parse(localStorage.tableData)
 	}
 
-	function isLocalStorageAvailable() {
+/*	function isLocalStorageAvailable() {
 	    try {
 	        return 'localStorage' in window && window['localStorage'] !== null
 	    } catch (e) {
 	        return false
 	    }
-	}
+	} 
+*/
 
 	function renderTabl(obj) {
 		for (var i = 0, length = obj.length; i < length; i++) {

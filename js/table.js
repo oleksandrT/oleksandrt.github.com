@@ -18,7 +18,7 @@ function Table(sel) {
 		
 		// titles = thead.getElementsByTagName('td')
 
-		console.log('container: ', container)
+		console.log('localStorage: ', localStorage)
 		// console.log('titles: ', titles)
 
 
